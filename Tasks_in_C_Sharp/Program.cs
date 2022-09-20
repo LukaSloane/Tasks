@@ -32,19 +32,28 @@ namespace Tasks_in_C_Sharp
                 return "Kaffee";
             }
 
-            async Task SetTableAsync()
+            async Task<string> SetTableAsync()
             {
                 "Hole Teller und Besteck aus dem Schrank".Dump();
                 "Bringe Teller und Besteck ins Esszimmer".Dump();
                 "Verteile Teller und Besteck auf dem Esstisch".Dump();
                 await Task.Delay(4000);
-                "Tisch ist gedeckt.".Dump();
+                var tableSet = "Tisch ist gedeckt.".Dump();
+                return tableSet;
             }
 
-            async Task MakeBreakfastAsnyc()
+            async Task<string> MakeBreakfastAsnyc()
             {
+                "Fruehstueck wird nun vorbereitet.".Dump();
+                await Task.Delay(1000);
+                "Kaffee kochen:".Dump();
                 await MakeCoffeeAsync();
+                await Task.Delay(1000);
+                "Tisch wird gedeckt:".Dump();
                 await SetTableAsync();
+                await Task.Delay(1000);
+                var breakfast = "Fruehstueckszeit! :)".Dump();
+                return breakfast;
             }
         }
         
