@@ -1,4 +1,5 @@
-﻿using System.Security.Policy;
+﻿using System;
+using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,53 +9,55 @@ namespace Tasks_in_C_Sharp
     {
         public static async Task Main(string[] args)
         {
-            await MakeBreakfastAsnyc();
+            await MittagsessenAsync();
             
-            async Task<string> MakeCoffeeAsync()
+            async Task MittagsessenAsync()
+            {
+                var nudeln = NudelnKochenAsync();
+                var sauce = SauceKochenAsync();
+                "Teller und Besteck aus dem Schrank nehmen".Dump();
+                "Tisch decken.".Dump();
+                await Task.WhenAll(nudeln, sauce);
+                "Nudeln und Sauce auf den Teller geben.".Dump();
+                "Enjoy! :)".Dump();
+            }
+            
+            
+            async Task<string> NudelnKochenAsync()
             {
                 //Thread.CurrentThread.ManagedThreadId.Dump();
-                var coffeeMaking = UseCoffeeMachineAsync();
-                "Kaffee Tassen aus dem Schrank holen.".Dump();
-                "Zucker und Milch bereit stellen.".Dump();
-                var coffee = await coffeeMaking;
-                var result = $"Fuelle {coffee} in die Tassen".Dump();
-                return result;
+                var boilingWasser = WasserAufsetzenAsync();
+                "Topf aus dem Schrank holen und auf den Herd stellen".Dump();
+                var coffee = await boilingWasser;
+                "Herdplatte anschalten".Dump();
+                "Nudeln in den Topf geben.".Dump();
+                "Kochendes Wasser zu den Nudeln in den Topf schütten.".Dump();
+                await Task.Delay(8000);
+                var nudeln = "Nudeln sind fertig.".Dump();
+                return nudeln;
             }
 
-            async Task<string> UseCoffeeMachineAsync()
+            async Task<string> WasserAufsetzenAsync()
             {
-                //Thread.CurrentThread.ManagedThreadId.Dump();
-                "Schalte die Kaffeemaschine ein.".Dump();
-                "Fuelle Kaffeepulver und Wasser in die Kaffeemaschine.".Dump();
-                "Starte die Kaffeemaschine.".Dump();
-                await Task.Delay(2000);
-                "Kaffeemaschine wurde gekocht.".Dump();
-                return "Kaffee";
-            }
-
-            async Task<string> SetTableAsync()
-            {
-                "Hole Teller und Besteck aus dem Schrank".Dump();
-                "Bringe Teller und Besteck ins Esszimmer".Dump();
-                "Verteile Teller und Besteck auf dem Esstisch".Dump();
+                "Fuelle den Wasserkocher mit Wasser.".Dump();
+                "Stelle den Wasserkocher an.".Dump();
                 await Task.Delay(4000);
-                var tableSet = "Tisch ist gedeckt.".Dump();
-                return tableSet;
+                var wasser = "Wasserkocher ist fertig.".Dump();
+                return wasser;
             }
 
-            async Task<string> MakeBreakfastAsnyc()
+            async Task<string> SauceKochenAsync()
             {
-                "Fruehstueck wird nun vorbereitet.".Dump();
-                await Task.Delay(1000);
-                "Kaffee kochen:".Dump();
-                await MakeCoffeeAsync();
-                await Task.Delay(1000);
-                "Tisch wird gedeckt:".Dump();
-                await SetTableAsync();
-                await Task.Delay(1000);
-                var breakfast = "Fruehstueckszeit! :)".Dump();
-                return breakfast;
+                "Hole einen kleinen Topf aus dem Schrank und stelle ihn auf den Herd".Dump();
+                "Herdplatte anschalten".Dump();
+                "Barilla Sauce aus dem Glas in den Topf geben.".Dump();
+                await Task.Delay(10000);
+                var sauce = "Sauce ist fertig.".Dump();
+                return sauce;
             }
+            
+            
+            
         }
         
         
